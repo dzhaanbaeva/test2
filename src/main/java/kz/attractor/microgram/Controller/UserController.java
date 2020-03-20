@@ -1,8 +1,9 @@
 package kz.attractor.microgram.Controller;
 
 import kz.attractor.microgram.Model.*;
+import kz.attractor.microgram.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,69 +12,51 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository UserRepo;
 
     @Autowired
-    private CommentRepository commentRepo;
+    private CommentRepository CommentRepo;
     @Autowired
-    private PublicationRepository publicationRepo;
+    private PublicationRepository PublicationRepo;
     @Autowired
-    private ILikeItRepository iLikeItRepo;
+    private ILikeItRepository ILikeItRepo;
     @Autowired
-    private UserSubscriptionsRepository userSubscriptionsRepo;
+    private UserSubscriptionsRepository UserSubscriptionsRepo;
 
 
     @PostMapping("/user")
     public User createUser(@RequestBody User user) {
-
         // merge
-        User userN = userRepo.findById(user.id).orElse(user);
-        for (Comment t : user.comments) {
-            if (userN.comments.stream().filter(x -> x.id.equals(t.id)).count() == 0)
-                userN.comments.add(t);
-        }
-        for (Publication t : user.publications) {
-            if (userN.publications.stream().filter(x -> x.id.equals(t.id)).count() == 0)
-                userN.publications.add(t);
-        }
-
-        List<Publication> publications = userN.publications;
-        for (Publication t : publications)
-            publicationRepo.save(t);
-
-//        for (ILikeIt t : user.iLikeIts) {
-//            if (userN.iLikeIts.stream().filter(x -> x.id.equals(t.id)).count() == 0)
-//                userN.iLikeIts.add(t);
-//        }
-//
-//        for (Publication t : user.comments) {
-//            if (userN.comments.stream().filter(x -> x.id.equals(t.id)).count() == 0)
-//                userN.comments.add(t);
-//        }
-
-        // save
-        List<Comment> comments = userN.comments;
-        for (Comment t : comments)
-            commentRepo.save(t);
-
-        userN.publicationCount = publications.size();
-
-        userRepo.save(userN);
+        User userN = UserRepo.findById(user.getId()).orElse(user);
         return userN;
     }
 
-    @DeleteMapping("/user/{id}")
-    public User deleteUser(@PathVariable String id) {
-        User user = userRepo.findById(id).orElse(new User());
-        userRepo.deleteById(id);
-
-        return user;
+    @GetMapping("/users")
+    public Iterable<User> getUsers() {
+        Sort s = Sort.by(Sort.Order.asc("name"));
+        return UserRepo.findAll(s);
+    }
+    @GetMapping("/user/{name}")
+    public User getName(@PathVariable("name") String name) {
+        return UserRepo.findByName(name);
     }
 
-    @GetMapping("/user/{id}")
-    public User getUser(@PathVariable String id) {
-        User user = userRepo.findById(id).orElse(new User());
-        return user;
+    @GetMapping("/user/{email}")
+    public boolean checkEmail(@PathVariable("email") String email) {
+        return UserRepo.existsByEmail(email);
     }
+//
+//
+//    @GetMapping("/watchPublication")
+//    public Iterable<Publication> watchAllPublication() {
+//        return publicationRepo.findAll();
+//    }
+//
+//
 
 }
+
+
+
+
+

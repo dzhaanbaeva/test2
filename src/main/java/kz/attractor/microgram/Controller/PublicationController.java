@@ -2,30 +2,28 @@ package kz.attractor.microgram.Controller;
 
 
 import kz.attractor.microgram.Model.Publication;
-import kz.attractor.microgram.Model.PublicationRepository;
+import kz.attractor.microgram.Model.User;
+import kz.attractor.microgram.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class PublicationController {
     @Autowired
     private PublicationRepository publicationRepo;
 
-    @DeleteMapping("/publication/{id}")
-    public Publication deleteTask(@PathVariable String id) {
-        Publication publication = publicationRepo.findById(id).orElse(new Publication());
-        publicationRepo.deleteById(id);
-
-        return publication;
+    @GetMapping("/publication")
+    public Iterable<Publication> getPublication() {
+        return publicationRepo.findAll();
     }
 
-    @GetMapping("/publication/{id}")
-    public Publication getTask(@PathVariable String id) {
-        Publication publication = publicationRepo.findById(id).orElse(new Publication());
-
-        return publication;
+    @GetMapping("/publication/{user}")
+    public Iterable<Publication> selectPublication(@PathVariable("user") String user){
+        return publicationRepo.selectPublication(user);
     }
+
+
 }

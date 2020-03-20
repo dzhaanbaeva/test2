@@ -2,7 +2,7 @@ package kz.attractor.microgram.Controller;
 
 
 import kz.attractor.microgram.Model.UserSubscriptions;
-import kz.attractor.microgram.Model.UserSubscriptionsRepository;
+import kz.attractor.microgram.repository.UserSubscriptionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
