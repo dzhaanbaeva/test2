@@ -1,48 +1,47 @@
 package kz.attractor.microgram.Model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import kz.attractor.microgram.util.Generator;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@Document(collection="users")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Document(collection = "users")
 @CompoundIndex(def = "{'name':1, 'email':1}")
 @Data
 public class User {
-    @Id
-    @Getter
-    @Setter
-    public String id;
-    @Getter
-    @Setter
-    public String name;
-    @Getter
-    @Setter
-    public String email;
-    @Getter
-    @Setter
-    public String password;
-    @Getter
-    @Setter
-    public int publicationCount = 0;
-    @Getter
-    @Setter
-    public int subscriptionsCount = 0;
-    @Getter
-    @Setter
-    public int subscribersCount = 0;
-    @DBRef
-    @Getter
-    @Setter
-    public List<Comment> comments = new ArrayList<>();
-    public List<Publication> publications = new ArrayList<>();
-//    public List<ILikeIt> iLikeIts = new ArrayList<>();
-//    public List<UserSubscriptions> userSubscriptions = new ArrayList<>();
 
-  }
+    @Id
+    private String id = UUID.randomUUID().toString();
+    public String name;
+    public String email;
+    public String password;
+    //    public int publicationCount = 0;
+//    public int subscriptionsCount = 0;
+//    public int subscribersCount = 0;
+//    @DBRef
+//    public Publication publication;
+//    @DBRef
+//    public List<String> subscriptionsId = new ArrayList<>();
+//    @DBRef
+//    public List<String> subscribersId = new ArrayList<>();
+
+    public static User random() {
+        return builder()
+                .name(Generator.makeName())
+                .email(Generator.makeEmail())
+                .password(Generator.makePassword())
+                .build();
+    }
+}
+
+
+
+
+

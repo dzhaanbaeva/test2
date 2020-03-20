@@ -1,27 +1,32 @@
 package kz.attractor.microgram.Model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import kz.attractor.microgram.repository.PublicationRepository;
+import kz.attractor.microgram.util.Generator;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 
 @Document(collection = "comments")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Comment{
     @Id
-    @Getter
-    @Setter
-    public String id;
-    @Getter
-    @Setter
+    @Builder.Default
+    private String id = UUID.randomUUID().toString();
+
+    @Autowired
+    private static PublicationRepository publicationRepo;
     public String comment;
-    @Getter
-    @Setter
-    public LocalDateTime dateTime = LocalDateTime.now();
 
-
+    public String commentTime;
 }
