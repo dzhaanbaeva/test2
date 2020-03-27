@@ -10,11 +10,13 @@ import kz.attractor.microgram.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,9 +39,13 @@ public class PreloadDataBase {
             commentRepo.deleteAll();
             likeRepo.deleteAll();
 
-            List<User> users = Stream.generate(User::random)
-                    .limit(10)
-                    .collect(toList());
+//            List<User> users = Stream.generate(User::random)
+//////                    .limit(10)
+//////                    .collect(toList());
+//////            userRepo.saveAll(users);
+            List<User> users = new ArrayList<>();
+            users.add(new User("1", "ainura", "ainura@gmail.com", new BCryptPasswordEncoder().encode("123")));
+            users.add(new User("2", "user", "user@gmail.com", new BCryptPasswordEncoder().encode("452")));
             userRepo.saveAll(users);
 
             List<Publication> publications = new ArrayList<>();
@@ -48,7 +54,7 @@ public class PreloadDataBase {
 
             users.forEach(user -> {
                 selectRandomMovies(comments, r.nextInt(3) + 1).stream()
-                        .map(comment -> Publication.random(user, comment))
+                        .map(comment -> Publication.random(user))
                         .peek(publications::add)
                         .forEach(publicationRepo::save);
             });
@@ -68,7 +74,7 @@ public class PreloadDataBase {
 
     private List<Comment> selectRandomMovies(List<Comment> movies, int amountOfMovies) {
         return Stream.generate(() -> pickRandom(movies))
-                .distinct()
+//                .distinct()
                 .limit(amountOfMovies)
                 .collect(toList());
     }

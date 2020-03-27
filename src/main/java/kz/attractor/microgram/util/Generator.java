@@ -1,5 +1,7 @@
 package kz.attractor.microgram.util;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -76,9 +78,9 @@ public final class Generator {
     }
 
     public static String makePassword() {
-        return removeExtra.matcher(makeGibberish(0,1))
+        return new BCryptPasswordEncoder().encode(removeExtra.matcher(makeGibberish(0,1))
                 .replaceAll("")
-                .replace(" ", "");
+                .replace(" ", ""));
     }
 
 
