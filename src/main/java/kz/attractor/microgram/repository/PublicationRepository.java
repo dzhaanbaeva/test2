@@ -12,6 +12,9 @@ public interface PublicationRepository extends CrudRepository<Publication, Strin
 public Optional<Publication> findById(String id);
 public Iterable<Publication> findAll();
  @Query("{'user': {'$regex' : '?0' , '$options' : 'm'}}")
- public  Iterable<Publication> selectPublication(String user);
+ public  Iterable<Publication> selectPublication(String id);
 
+ public Iterable<Publication> findPublicationsByUserId(String id);
+ public Iterable<Publication> deletePublicationById(String id);
+ public Iterable<Publication> findPublicationsById(String id);
  }
