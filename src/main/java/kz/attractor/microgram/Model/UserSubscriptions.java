@@ -21,6 +21,9 @@ public class UserSubscriptions {
     public  String userId;
     @Getter
     @Setter
+    public  String userId2;
+    @Getter
+    @Setter
     public LocalDateTime eventsDate = LocalDateTime.now();
 
 

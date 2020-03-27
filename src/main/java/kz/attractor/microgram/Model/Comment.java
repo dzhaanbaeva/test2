@@ -24,9 +24,10 @@ public class Comment{
     @Builder.Default
     private String id = UUID.randomUUID().toString();
 
-    @Autowired
-    private static PublicationRepository publicationRepo;
+//    @Autowired
+//    private static PublicationRepository publicationRepo;
     public String comment;
-
+    @DBRef
+    public Publication publicationId;
     public String commentTime;
 }

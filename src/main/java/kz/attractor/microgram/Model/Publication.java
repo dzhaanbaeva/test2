@@ -30,14 +30,14 @@ public class Publication {
     @DBRef
     public User user;
 
-    @DBRef
-    public Comment comment;
+//    @DBRef
+//    public Comment comment;
 
-    public static Publication random(User user, Comment comment) {
+    public static Publication random(User user) {
         return builder()
                 .user(user)
                 .description(Generator.makeDescription())
-                .comment(comment)
+//                .comment(comment)
                 .build();
     }
 

@@ -20,7 +20,7 @@ public class UserDTO {
 
         return builder()
                 .id(user.getId())
-                .name(user.getName())
+                .username(user.getUsername())
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .build();
@@ -29,7 +29,7 @@ public class UserDTO {
 
 
     private String id = UUID.randomUUID().toString();
-    public String name;
+    public String username;
     public String email;
     public String password;
     public int publicationCount = 0;

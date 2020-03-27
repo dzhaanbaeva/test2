@@ -17,19 +17,24 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class PublicationDTO {
 
-    public  PublicationDTO from(Publication publication) {
+    public static PublicationDTO from(Publication publication) {
 
         return builder()
                 .id(publication.getId())
                 .images(publication.getImages())
                 .description(publication.getDescription())
+                .userId(publication.getUser().getId())
                 .dateTime(LocalDateTime.now())
                 .build();
+
     }
 
     private String id = UUID.randomUUID().toString();
     public  String images;
     public  String description;
+    public String userId;
     public LocalDateTime dateTime = LocalDateTime.now();
+
+
 
 }

@@ -1,4 +1,4 @@
 package kz.attractor.microgram.service;
 
-public class Publication {
+public class ILikeItService {
 }
