@@ -1,4 +1,5 @@
 package kz.attractor.microgram.dto;
+import kz.attractor.microgram.Model.User;
 import  lombok.*;
 import kz.attractor.microgram.Model.ILikeIt;
 import kz.attractor.microgram.Model.Publication;
@@ -17,22 +18,30 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class PublicationDTO {
 
+
+    public PublicationDTO(String description, String image, String user) {
+        this.description = description;
+        this.image = image;
+        this.user = user;
+
+    }
+
     public static PublicationDTO from(Publication publication) {
 
         return builder()
                 .id(publication.getId())
-                .images(publication.getImages())
+                .image(publication.getImage())
                 .description(publication.getDescription())
-                .userId(publication.getUser().getId())
+                .user(publication.getUser().getId())
                 .dateTime(LocalDateTime.now())
                 .build();
 
     }
 
     private String id = UUID.randomUUID().toString();
-    public  String images;
+    public  String image;
     public  String description;
-    public String userId;
+    public String user;
     public LocalDateTime dateTime = LocalDateTime.now();
 
 

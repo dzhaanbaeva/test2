@@ -21,9 +21,9 @@ public class PublicationService {
     public PublicationDTO addPublication(PublicationDTO publicationData) {
 
         Publication publication = Publication.builder()
-                .images(publicationData.getImages())
+                .image(publicationData.getImage())
                 .description(publicationData.getDescription())
-                .user(User.builder().id(publicationData.getUserId()).build())
+                .user(User.builder().id(publicationData.getUser()).build())
                 .dateTime(LocalDateTime.now())
                 .build();
 

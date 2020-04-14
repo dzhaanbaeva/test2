@@ -3,11 +3,15 @@ package kz.attractor.microgram.Controller;
 
 import kz.attractor.microgram.Model.Publication;
 import kz.attractor.microgram.dto.PublicationDTO;
-import kz.attractor.microgram.dto.UserDTO;
+import kz.attractor.microgram.repository.PublicationRepository;
 import kz.attractor.microgram.service.PublicationService;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/publication")
@@ -18,15 +22,32 @@ public class PublicationController {
     public PublicationController(PublicationService publicationService) {
         this.publicationService = publicationService;
     }
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public PublicationDTO addPublication(@RequestBody PublicationDTO publicationData) {
-        return publicationService.addPublication(publicationData);
-    }
 
     @GetMapping
     public Iterable<Publication> getPublications() {
         return publicationService.getPublication();
     }
+
+    @PostMapping
+    public PublicationDTO rootSave(
+                           @RequestParam("description") String description,
+                           @RequestParam("user") String user,
+                           @RequestParam("images") MultipartFile images
+                           ) throws IOException {
+        File photoFile = new File("src/main/resources/static/images/"+ images.getOriginalFilename());
+//        photoFile.createNewFile();
+        FileOutputStream os = new FileOutputStream(photoFile);
+        os.write(images.getBytes());
+        os.close();
+
+        PublicationDTO publication;
+        publication = new PublicationDTO(description, images.getOriginalFilename(),user);
+        publicationService.addPublication(publication);
+
+        return publication;
+    }
+
+
 
     @GetMapping("/{id}")
     public Iterable<Publication> selectPublications(@PathVariable("id") String id){
@@ -44,6 +65,12 @@ public class PublicationController {
 
         return ResponseEntity.notFound().build();
     }
+
+//    @GetMapping("/demo/getUser")
+//    public Map<String, Object> getUser() {
+//        return this.userMap;
+//    }
+
 
 
 

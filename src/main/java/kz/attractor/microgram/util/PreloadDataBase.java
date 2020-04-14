@@ -34,15 +34,11 @@ public class PreloadDataBase {
     @Bean
     CommandLineRunner usersInit(UserRepository userRepo, PublicationRepository publicationRepo, CommentRepository commentRepo, ILikeItRepository likeRepo) {
         return (args) -> {
-            userRepo.deleteAll();
-            publicationRepo.deleteAll();
-            commentRepo.deleteAll();
-            likeRepo.deleteAll();
+//            userRepo.deleteAll();
+//            publicationRepo.deleteAll();
+//            commentRepo.deleteAll();
+//            likeRepo.deleteAll();
 
-//            List<User> users = Stream.generate(User::random)
-//////                    .limit(10)
-//////                    .collect(toList());
-//////            userRepo.saveAll(users);
             List<User> users = new ArrayList<>();
             users.add(new User("1", "ainura", "ainura@gmail.com", new BCryptPasswordEncoder().encode("123")));
             users.add(new User("2", "user", "user@gmail.com", new BCryptPasswordEncoder().encode("452")));
@@ -80,7 +76,7 @@ public class PreloadDataBase {
     }
     private List<Publication> selectRandomRepo(List<Publication> repo, int amountOfMovies) {
         return Stream.generate(() -> pickRnd(repo))
-//                .distinct()
+                .distinct()
                 .limit(amountOfMovies)
                 .collect(toList());
     }

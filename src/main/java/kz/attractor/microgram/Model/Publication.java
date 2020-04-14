@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -23,12 +24,19 @@ public class Publication {
     @Id
     @Builder.Default
     private String id = UUID.randomUUID().toString();
-    public  String images;
+    public  String image;
     public  String description;
     public LocalDateTime dateTime = LocalDateTime.now();
 
     @DBRef
     public User user;
+
+//    public Publication(String user, String description, String images) {
+//        Objects.requireNonNull(description);
+//        Objects.requireNonNull(images);
+////        this.id = String.valueOf(description.hashCode()); //UUID.randomUUID().toString();
+//
+//    }
 
 //    @DBRef
 //    public Comment comment;
