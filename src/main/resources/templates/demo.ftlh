@@ -24,7 +24,7 @@
             <div class="card my-3 none">
                 <!-- image block start -->
                 <div>
-                    <img class="d-block w-100" src="http://placekitten.com/500/500" alt="Post image">
+                    <img class="d-block w-100" src="http://placekitten.com/200/200" alt="Post image">
                 </div>
                 <!-- image block end -->
                 <div class="px-4 py-3">

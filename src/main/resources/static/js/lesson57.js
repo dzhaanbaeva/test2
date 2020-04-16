@@ -111,14 +111,14 @@ window.addEventListener('load', function () {
     function createCommentElement(comment) {
         if (comment.publication) {
             const root = document.getElementById(comment.publication.id);
-            console.log(root, "++++++++++++++++++")
             let div = document.createElement('div');
             const h6 = document.createElement("h6");
             h6.innerHTML = comment.user && comment.user.username;
             const p = document.createElement("p");
             p.innerHTML = comment.comment;
-            div.append(h6)
-            div.append(p)
+            div.append(h6);
+            div.append(p);
+
             root.append(div)
         }
 
@@ -242,6 +242,12 @@ window.addEventListener('load', function () {
     }
 
     //-------------------HW_60_Task1-------------------------------
+    // comments post
+    let publicId;
+
+    function getId(id) {
+        publicId = id;
+    }
 
     const publications = fetch("http://localhost:9393/publication", {
         method: "GET"
@@ -260,20 +266,25 @@ window.addEventListener('load', function () {
             for (let i = 0; i < comment.length; i++) {
                 comment[i].addEventListener('click', function (event) {
                     form.classList.remove("none");
-                    window.scrollTo(0, 0)
+                   setTimeout(function () {
+                       console.log(publicId);
 
-                });
+                       fetch("http://localhost:9393/comment/" + publicId, {
+                           method: "GET"
+                       }).then(res => res.json()).then(
+                           (comment) => {
+                               comment.map(el => {
+                                   createCommentElement(el)
+                               })
+                           }
+                       )
+                   },1000)
+                })
             }
 
 
         }) .catch(err => console.log(err))
 
-    // comments post
-    let publicId;
-
-    function getId(id) {
-        publicId = id
-    }
 
     const saveButton = document.getElementById("add-comment");
     saveButton.addEventListener("click", function () {

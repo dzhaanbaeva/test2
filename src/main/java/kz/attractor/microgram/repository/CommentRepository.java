@@ -11,6 +11,5 @@ public interface CommentRepository extends CrudRepository<Comment, String> {
     public List<Comment> findAll();
     public Iterable<Comment> deleteCommentById(String id);
     public Optional<Comment> findById(String id);
-    @Query("{'publication': {'$regex' : '?0' , '$options' : 'i'}}")
-    public Iterable<Comment> selectPublication(String publication);
+    public Iterable<Comment> findCommentsByPublicationId( String publication);
 }

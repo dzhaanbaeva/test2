@@ -24,6 +24,7 @@ public class CommentSevice {
                 .publication(Publication.builder().id(commentData.getPublication()).build())
                 .comment(commentData.getComment())
                 .commentTime(commentData.getCommentTime())
+                .user(User.builder().id(commentData.getUser()).build())
                 .build();
 
 
@@ -45,8 +46,9 @@ public class CommentSevice {
     public Iterable<Comment> getComments() {
         return commentRepository.findAll();
     }
-    public Iterable<Comment> getPublication(String publication) {
-        return commentRepository.selectPublication(publication);
+
+    public Iterable<Comment> selectPublication(String publication) {
+        return commentRepository.findCommentsByPublicationId(publication);
     }
 
 }

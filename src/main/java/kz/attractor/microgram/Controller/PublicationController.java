@@ -66,10 +66,6 @@ public class PublicationController {
         return ResponseEntity.notFound().build();
     }
 
-//    @GetMapping("/demo/getUser")
-//    public Map<String, Object> getUser() {
-//        return this.userMap;
-//    }
 
 
 

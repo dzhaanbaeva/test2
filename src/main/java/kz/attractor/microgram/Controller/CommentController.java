@@ -46,7 +46,7 @@ public class CommentController {
 }
     @GetMapping("/{publication}")
     public Iterable<Comment> selectPublication(@PathVariable("publication") String publication){
-        return commentSevice.getPublication(publication);
+        return commentSevice.selectPublication(publication);
     }
 
     @DeleteMapping("/{id}")
