@@ -1,10 +1,7 @@
 package kz.attractor.microgram.Model;
 
 import kz.attractor.microgram.util.Generator;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -18,6 +15,7 @@ import java.util.UUID;
 @Document(collection = "publications")
 @Data
 @Builder
+@AllArgsConstructor
 public class Publication {
     private static final Random r = new Random();
 
