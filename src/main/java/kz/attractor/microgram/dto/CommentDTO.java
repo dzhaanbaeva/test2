@@ -13,13 +13,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class CommentDTO {
 
+    public CommentDTO(String comment, String publication, String user) {
+        this.comment = comment;
+        this.publication = publication;
+        this.user = user;
+
+
+    }
+
     public static CommentDTO from(Comment comment) {
 
         return builder()
                 .id(comment.getId())
                 .comment(comment.getComment())
-                .publicationId(comment.getPublicationId().getId())
-                .commentTime(comment.getCommentTime())
+                .publication(comment.getPublication().getId())
+                .user(comment.getUser().getId())
+                .commentTime(LocalDateTime.now())
                 .build();
 
 
@@ -27,7 +36,8 @@ public class CommentDTO {
 
     public String id;
     public String comment;
-    public String publicationId;
-    public String commentTime ;
+    public String publication;
+    public String user;
+    public LocalDateTime commentTime = LocalDateTime.now();
 
 }

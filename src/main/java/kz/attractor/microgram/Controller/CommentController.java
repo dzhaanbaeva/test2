@@ -1,13 +1,13 @@
 package kz.attractor.microgram.Controller;
 
 import kz.attractor.microgram.Model.Comment;
-import kz.attractor.microgram.Model.User;
 import kz.attractor.microgram.dto.CommentDTO;
-import kz.attractor.microgram.dto.PublicationDTO;
 import kz.attractor.microgram.service.CommentSevice;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/comment")
@@ -24,9 +24,29 @@ public class CommentController {
         return commentSevice.getComments();
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public CommentDTO addComment(@RequestBody CommentDTO commentData) {
-        return commentSevice.addComment(commentData);
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public CommentDTO addComment(@RequestBody CommentDTO commentData) {
+//        return commentSevice.addComment(commentData);
+//    }
+
+     @PostMapping
+     public CommentDTO commentSave(
+             @RequestParam("comment") String comment,
+             @RequestParam("publication") String publication,
+             @RequestParam("user") String user) throws IOException {
+         System.out.println(publication);
+         System.out.println(user);
+         System.out.println(comment);
+      CommentDTO comments;
+         comments = new CommentDTO(comment, publication, user);
+         commentSevice.addComment(comments);
+
+    return comments;
+
+}
+    @GetMapping("/{publication}")
+    public Iterable<Comment> selectPublication(@PathVariable("publication") String publication){
+        return commentSevice.getPublication(publication);
     }
 
     @DeleteMapping("/{id}")

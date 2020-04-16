@@ -36,7 +36,7 @@ public class PreloadDataBase {
         return (args) -> {
 //            userRepo.deleteAll();
 //            publicationRepo.deleteAll();
-//            commentRepo.deleteAll();
+            commentRepo.deleteAll();
 //            likeRepo.deleteAll();
 
             List<User> users = new ArrayList<>();
@@ -46,10 +46,11 @@ public class PreloadDataBase {
 
             List<Publication> publications = new ArrayList<>();
             List<Comment> comments = readMovies("comments.json");
+//            List<Comment> comments = new ArrayList<>();
             List<ILikeIt> likes = new ArrayList<>();
 
             users.forEach(user -> {
-                selectRandomMovies(comments, r.nextInt(3) + 1).stream()
+                selectRandomMovies(comments, r.nextInt(1) + 1).stream()
                         .map(comment -> Publication.random(user))
                         .peek(publications::add)
                         .forEach(publicationRepo::save);

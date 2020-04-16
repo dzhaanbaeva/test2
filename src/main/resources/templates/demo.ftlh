@@ -12,6 +12,10 @@
 
 <body class="no-scroll">
 <div class="container">
+    <form id="comment-form" class="comment-from none" name="comment">
+        <textarea name="comment"></textarea>
+        <button type="button" id="add-comment">Enter</button>
+    </form>
     <div class="row justify-content-center">
         <div class="col col-lg-7 posts-container">
             <!-- single post start -->

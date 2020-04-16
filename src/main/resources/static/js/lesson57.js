@@ -8,7 +8,7 @@ window.addEventListener('load', function () {
     class User {
         constructor(id, name, email) {
             this.id = id;
-            this.name = name;
+            this.username = name;
             this.email = email;
             this.state = "unauthorized";
         }
@@ -109,15 +109,19 @@ window.addEventListener('load', function () {
     hideSplashScreen();
 
     function createCommentElement(comment) {
-        const root = document.querySelector("#comment");
-        let div = document.createElement('div');
-        const h6 = document.createElement("h6");
-        h6.innerHTML = comment.user.name;
-        const p = document.createElement("p");
-        p.innerHTML = comment.comment;
-        div.append(h6)
-        div.append(p)
-        root.append(div)
+        if (comment.publication) {
+            const root = document.getElementById(comment.publication.id);
+            console.log(root, "++++++++++++++++++")
+            let div = document.createElement('div');
+            const h6 = document.createElement("h6");
+            h6.innerHTML = comment.user && comment.user.username;
+            const p = document.createElement("p");
+            p.innerHTML = comment.comment;
+            div.append(h6)
+            div.append(p)
+            root.append(div)
+        }
+
     }
 
     createCommentElement(comment1)
@@ -125,6 +129,7 @@ window.addEventListener('load', function () {
 
     function createPostElement(post) {
         const div = document.createElement('div');
+        div.setAttribute("id", post.id);
         const h2 = document.createElement('h2');
         h2.innerHTML = post.user.username;
         const p = document.createElement("p");
@@ -138,48 +143,44 @@ window.addEventListener('load', function () {
         } else {
             img.setAttribute('src', image1);
         }
-        img.setAttribute('height', '500px');
-        img.setAttribute('width', '650px');
+        img.setAttribute('height', '200px');
+        img.setAttribute('width', '200px');
         img.setAttribute('class', 'd-block w-100');
         const div1 = document.createElement('div');
         div1.setAttribute('class', 'd-flex justify-content-around');
         div1.setAttribute('margin-bottom', '20px');
         div1.setAttribute('margin-top', '20px');
-        const span = document.createElement("span");
         const span1 = document.createElement("span");
         const span2 = document.createElement("span");
         const span3 = document.createElement("span");
         const span4 = document.createElement("span");
         const span5 = document.createElement("span");
-        span.setAttribute('class', 'h1 mx-2 text-danger');
         span1.setAttribute('class', 'h1 mx-2 muted');
         span2.setAttribute('class', 'h1 mx-2 muted');
         span3.setAttribute('class', 'mx-auto');
         span4.setAttribute('class', 'h1 mx-2 muted');
-        span5.setAttribute('class', ' h1 mx-2 muted');
-        const i = document.createElement("i");
         const i1 = document.createElement("i");
         const i2 = document.createElement("i");
-        const i4 = document.createElement("i");
-        const i5 = document.createElement("i");
-        i1.setAttribute('class', 'far fa-heart');
+        const i3 = document.createElement("i");
         i1.setAttribute('class', 'far fa-heart');
         i2.setAttribute('class', 'far fa-comment');
-        i4.setAttribute('class', 'far fa-bookmark');
+        i3.setAttribute('class', 'far fa-bookmark');
         div.append(h2);
         div.append(img);
         span1.append(i1);
         span2.append(i2);
-        span4.append(i4);
-        span5.append(i5);
+        span4.append(i3);
         div1.append(span1)
         div1.append(span2)
         div1.append(span3)
         div1.append(span4)
-        div1.append(span5)
         div2.append(div1);
         div2.append(p);
         div.append(div2);
+        div.addEventListener('click', function (e) {
+            getId(post.id)
+            // console.log(post.id)
+        });
 
 
         return div;
@@ -213,7 +214,7 @@ window.addEventListener('load', function () {
         img2[i].addEventListener('dblclick', function (event) {
             const el = twoClick[i].classList;
             let classes = el.toggle("fas");
-            console.log(classes)
+            // console.log(classes)
 
         });
     }
@@ -224,7 +225,7 @@ window.addEventListener('load', function () {
         bookmark[i].addEventListener('click', function (event) {
             const bm = bookmark[i].classList;
             let classes = bm.toggle("fas");
-            console.log(classes)
+            // console.log(classes)
 
         });
     }
@@ -232,7 +233,7 @@ window.addEventListener('load', function () {
     const button = document.getElementsByTagName("button");
     for (let i = 0; i < button.length; i++) {
         button[i].addEventListener('click', function (event) {
-            console.log('button clicked');
+            // console.log('button clicked');
             const b = button[i].classList;
             let hide = hideSplashScreen();
             let h = b.toggle(hide);
@@ -244,14 +245,57 @@ window.addEventListener('load', function () {
 
     const publications = fetch("http://localhost:9393/publication", {
         method: "GET"
-    }).then(response => response.json());
+    }).then(response => response.json())
+
 
     publications.then(result => {
         result.forEach(publication => {
-            console.log(publication);
+            // console.log(publication);
             addPost(createPostElement(publication))
         })
-    }).catch(err => console.log(err))
+    }).then(function () {
+            // for comments form
+            const comment = document.getElementsByClassName('far fa-comment');
+            const form = document.getElementById('comment-form');
+            for (let i = 0; i < comment.length; i++) {
+                comment[i].addEventListener('click', function (event) {
+                    form.classList.remove("none");
+                    window.scrollTo(0, 0)
+
+                });
+            }
+
+
+        }) .catch(err => console.log(err))
+
+    // comments post
+    let publicId;
+
+    function getId(id) {
+        publicId = id
+    }
+
+    const saveButton = document.getElementById("add-comment");
+    saveButton.addEventListener("click", function () {
+        const commentForm = document.getElementById("comment-form");
+        let data = new FormData(commentForm);
+        data.append("user", "1");
+        data.append("publication", publicId);
+        fetch("http://localhost:9393/comment", {
+            method: 'POST',
+            body: data
+        }).then(r => r.json()).then(data => {
+            const comments = fetch("http://localhost:9393/comment", {
+                method: "GET"
+            }).then(response => response.json());
+            comments.then(result => {
+                result.forEach(comment => {
+                    createCommentElement(comment);
+                })
+            })
+        }).catch(err => console.log(err))
+    });
+
 
 });
 

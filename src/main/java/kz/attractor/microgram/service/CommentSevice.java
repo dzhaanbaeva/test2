@@ -21,7 +21,7 @@ public class CommentSevice {
     public CommentDTO addComment(CommentDTO commentData) {
 
         Comment comment = Comment.builder()
-                .publicationId(Publication.builder().id(commentData.getPublicationId()).build())
+                .publication(Publication.builder().id(commentData.getPublication()).build())
                 .comment(commentData.getComment())
                 .commentTime(commentData.getCommentTime())
                 .build();
@@ -41,9 +41,12 @@ public class CommentSevice {
     public Optional<Comment> getComment(String id) {
         return commentRepository.findById(id);
     }
+
     public Iterable<Comment> getComments() {
         return commentRepository.findAll();
     }
-
+    public Iterable<Comment> getPublication(String publication) {
+        return commentRepository.selectPublication(publication);
+    }
 
 }
