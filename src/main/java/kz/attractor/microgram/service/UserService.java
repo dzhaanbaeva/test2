@@ -17,8 +17,9 @@ public class UserService {
     public UserDTO addUser(UserDTO UserData) {
 
         var user = User.builder()
-                .username(UserData.getUsername())
                 .email(UserData.getEmail())
+                .name(UserData.getName())
+                .login(UserData.getLogin())
                 .password(UserData.getPassword())
                 .build();
 
@@ -28,7 +29,7 @@ public class UserService {
     public Iterable<User> getUsers() { return userRepository.findAll(); }
 
     public Optional<User> getName(String name) {
-        return userRepository.findByUsername(name);
+        return userRepository.findByName(name);
     }
     public boolean existsEmail(String email) {
         return userRepository.existsByEmail(email);

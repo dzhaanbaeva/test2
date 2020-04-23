@@ -35,12 +35,17 @@ public class DemoController {
         return "posts";
     }
 
-//    @PostMapping("/posts/post")
-//    public String postDemo(@RequestParam("images") String images,
-//                           @RequestParam("description") String description) {
-//        System.out.println(images);
-//        System.out.println(description);
-//        return "redirect:/posts/";
-//    }
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        return "registration";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
+
+
+
 
 }

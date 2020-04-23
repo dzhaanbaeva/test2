@@ -34,14 +34,14 @@ public class PreloadDataBase {
     @Bean
     CommandLineRunner usersInit(UserRepository userRepo, PublicationRepository publicationRepo, CommentRepository commentRepo, ILikeItRepository likeRepo) {
         return (args) -> {
-//            userRepo.deleteAll();
+            userRepo.deleteAll();
             publicationRepo.deleteAll();
               commentRepo.deleteAll();
 //            likeRepo.deleteAll();
-
+//
             List<User> users = new ArrayList<>();
-            users.add(new User("1", "ainura", "ainura@gmail.com", new BCryptPasswordEncoder().encode("123")));
-            users.add(new User("2", "user", "user@gmail.com", new BCryptPasswordEncoder().encode("452")));
+            users.add(new User("ainura@gmail.com", "ainura", "dzhainura","123"));
+            users.add(new User("user@gmail.com", "user", "testuser", "452"));
             userRepo.saveAll(users);
 
 

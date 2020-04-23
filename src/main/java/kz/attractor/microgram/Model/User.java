@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.*;
 
@@ -24,8 +25,9 @@ public class User implements UserDetails{
     @Id
     @Builder.Default
     private String id = UUID.randomUUID().toString();
-    public String username;
+    public String name;
     public String email;
+    public String login;
     public String password;
     //    public int publicationCount = 0;
 //    public int subscriptionsCount = 0;
@@ -39,7 +41,7 @@ public class User implements UserDetails{
 
     public static User random() {
         return builder()
-                .username(Generator.makeName())
+                .name(Generator.makeName())
                 .email(Generator.makeEmail())
                 .password(Generator.makePassword())
                 .build();
@@ -50,12 +52,13 @@ public class User implements UserDetails{
 
     @Override
     public String getUsername() {
-        return username;
+        return this.login;
     }
+    public String getPassword() { return this.password; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority>
@@ -82,6 +85,13 @@ public class User implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
+    public User(String email, String name, String login, String password) {
+        this.email = email;
+        this.name = name;
+        this.login = login;
+        this.password = new BCryptPasswordEncoder().encode(password);
+           }
 }
 
 
