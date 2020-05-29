@@ -22,8 +22,8 @@ public class Publication {
     @Id
     @Builder.Default
     private String id = UUID.randomUUID().toString();
-    public  String image;
-    public  String description;
+    public String image;
+    public String description;
     public LocalDateTime dateTime = LocalDateTime.now();
 
     @DBRef

@@ -20,7 +20,7 @@ import java.util.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @AllArgsConstructor
-public class User implements UserDetails{
+public class User implements UserDetails {
 
     @Id
     @Builder.Default
@@ -48,13 +48,14 @@ public class User implements UserDetails{
     }
 
 
-
-
     @Override
     public String getUsername() {
         return this.login;
     }
-    public String getPassword() { return this.password; }
+
+    public String getPassword() {
+        return this.password;
+    }
 
 //    public void setPassword(String password) {
 //        this.password = password;
@@ -91,7 +92,7 @@ public class User implements UserDetails{
         this.name = name;
         this.login = login;
         this.password = new BCryptPasswordEncoder().encode(password);
-           }
+    }
 }
 
 

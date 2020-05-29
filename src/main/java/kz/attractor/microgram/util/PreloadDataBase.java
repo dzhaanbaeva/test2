@@ -36,27 +36,26 @@ public class PreloadDataBase {
         return (args) -> {
             userRepo.deleteAll();
             publicationRepo.deleteAll();
-              commentRepo.deleteAll();
+            commentRepo.deleteAll();
 //            likeRepo.deleteAll();
 //
             List<User> users = new ArrayList<>();
-            users.add(new User("ainura@gmail.com", "ainura", "dzhainura","123"));
+            users.add(new User("ainura@gmail.com", "ainura", "dzhainura", "123"));
             users.add(new User("user@gmail.com", "user", "testuser", "452"));
             userRepo.saveAll(users);
 
 
             List<Publication> publications = new ArrayList<>();
-            publications.add(new Publication("1", null,"nature", LocalDateTime.now(), users.get(0)));
-            publications.add(new Publication("2", null,"Good", LocalDateTime.now(), users.get(1)));
+            publications.add(new Publication("1", null, "nature", LocalDateTime.now(), users.get(0)));
+            publications.add(new Publication("2", null, "Good", LocalDateTime.now(), users.get(1)));
             publicationRepo.saveAll(publications);
 //            List<Comment> comments = readMovies("comments.json");
 
             List<Comment> comments = new ArrayList<>();
-            comments.add(new Comment("1", "Coool",publications.get(0), users.get(1), LocalDateTime.now()));
-            comments.add(new Comment("1", "Nice picture",publications.get(1), users.get(0), LocalDateTime.now()));
+            comments.add(new Comment("1", "Coool", publications.get(0), users.get(1), LocalDateTime.now()));
+            comments.add(new Comment("1", "Nice picture", publications.get(1), users.get(0), LocalDateTime.now()));
             commentRepo.saveAll(comments);
             List<ILikeIt> likes = new ArrayList<>();
-
 
 
 //            users.forEach(user -> {

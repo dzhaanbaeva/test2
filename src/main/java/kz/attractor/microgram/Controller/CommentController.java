@@ -29,23 +29,24 @@ public class CommentController {
 //        return commentSevice.addComment(commentData);
 //    }
 
-     @PostMapping
-     public CommentDTO commentSave(
-             @RequestParam("comment") String comment,
-             @RequestParam("publication") String publication,
-             @RequestParam("user") String user) throws IOException {
-         System.out.println(publication);
-         System.out.println(user);
-         System.out.println(comment);
-      CommentDTO comments;
-         comments = new CommentDTO(comment, publication, user);
-         commentSevice.addComment(comments);
+    @PostMapping
+    public CommentDTO commentSave(
+            @RequestParam("comment") String comment,
+            @RequestParam("publication") String publication,
+            @RequestParam("user") String user) throws IOException {
+        System.out.println(publication);
+        System.out.println(user);
+        System.out.println(comment);
+        CommentDTO comments;
+        comments = new CommentDTO(comment, publication, user);
+        commentSevice.addComment(comments);
 
-    return comments;
+        return comments;
 
-}
+    }
+
     @GetMapping("/{publication}")
-    public Iterable<Comment> selectPublication(@PathVariable("publication") String publication){
+    public Iterable<Comment> selectPublication(@PathVariable("publication") String publication) {
         return commentSevice.selectPublication(publication);
     }
 
@@ -59,7 +60,7 @@ public class CommentController {
 
 
     @GetMapping("/comment/{id}")
-      public Iterable<Comment> getComment(@PathVariable("id") String id) {
+    public Iterable<Comment> getComment(@PathVariable("id") String id) {
         return commentSevice.getComments();
     }
 }

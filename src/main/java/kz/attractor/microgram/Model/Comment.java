@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-public class Comment{
+public class Comment {
     @Id
     @Builder.Default
     private String id = UUID.randomUUID().toString();

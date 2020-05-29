@@ -38,6 +38,7 @@ public final class Generator {
     public static String makeDescription() {
         return makeGibberish(20, 10);
     }
+
     public static String makeComment() {
         return makeGibberish(10, 5);
     }
@@ -48,7 +49,7 @@ public final class Generator {
         }
 
 
-        var wordCount = r.nextInt(randomAmount)+min;
+        var wordCount = r.nextInt(randomAmount) + min;
         if (wordCount < 1) {
             wordCount = 1;
         }
@@ -57,11 +58,11 @@ public final class Generator {
         if (gibberish.endsWith(",")) {
             gibberish = gibberish.substring(0, gibberish.length() - 2);
         }
-        return  gibberish.endsWith(".") ? gibberish : gibberish + ".";
+        return gibberish.endsWith(".") ? gibberish : gibberish + ".";
     }
 
     public static String makeName() {
-        return makeGibberish(3,2);
+        return makeGibberish(3, 2);
     }
 
     private static String takeOneWord() {
@@ -69,16 +70,17 @@ public final class Generator {
     }
 
     private static final Pattern removeExtra = Pattern.compile("[.,;]+?");
+
     public static String makeEmail() {
-        var prefix = removeExtra.matcher(makeGibberish(6,0)).replaceAll("").toLowerCase();
-        var suffix = removeExtra.matcher(makeGibberish(2,0)).replaceAll("").toLowerCase();
-        var ext = removeExtra.matcher(makeGibberish(2,0)).replaceAll("").toLowerCase();
+        var prefix = removeExtra.matcher(makeGibberish(6, 0)).replaceAll("").toLowerCase();
+        var suffix = removeExtra.matcher(makeGibberish(2, 0)).replaceAll("").toLowerCase();
+        var ext = removeExtra.matcher(makeGibberish(2, 0)).replaceAll("").toLowerCase();
         var email = String.format("%s@%s.%s", prefix, suffix, ext);
         return email.replace(" ", "");
     }
 
     public static String makePassword() {
-        return new BCryptPasswordEncoder().encode(removeExtra.matcher(makeGibberish(0,1))
+        return new BCryptPasswordEncoder().encode(removeExtra.matcher(makeGibberish(0, 1))
                 .replaceAll("")
                 .replace(" ", ""));
     }

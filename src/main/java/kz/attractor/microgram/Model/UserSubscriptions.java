@@ -18,10 +18,10 @@ public class UserSubscriptions {
     public String id;
     @Getter
     @Setter
-    public  String userId;
+    public String userId;
     @Getter
     @Setter
-    public  String userId2;
+    public String userId2;
     @Getter
     @Setter
     public LocalDateTime eventsDate = LocalDateTime.now();

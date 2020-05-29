@@ -6,12 +6,17 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<User,String> {
+public interface UserRepository extends CrudRepository<User, String> {
     boolean existsByEmail(String email);
-    public  Iterable<User> getByEmail(String email);
-    public  Optional<User> findByName(String name);
+
+    public Iterable<User> getByEmail(String email);
+
+    public Optional<User> findByName(String name);
+
     public Iterable<User> findAll();
+
     public Iterable<User> getUserById(String id);
+
     public Optional<User> findByLogin(String s);
 
 }

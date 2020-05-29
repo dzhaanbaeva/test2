@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class ILikeItDTO {
 
-    public  ILikeItDTO from(ILikeIt likeIt) {
+    public ILikeItDTO from(ILikeIt likeIt) {
 
         return builder()
                 .id(likeIt.getId())
@@ -28,7 +28,6 @@ public class ILikeItDTO {
                 .publication(publication)
                 .build();
     }
-
 
 
     @Id

@@ -1,9 +1,8 @@
-
 'use strict';
 window.addEventListener('load', function () {
 
     const saveButton = document.getElementById("save-post");
-    saveButton.addEventListener("click", function() {
+    saveButton.addEventListener("click", function () {
         const postForm = document.getElementById("post-form");
         let data = new FormData(postForm);
         data.append("user", "1");

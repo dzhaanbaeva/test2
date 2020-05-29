@@ -9,7 +9,10 @@ import java.util.Optional;
 
 public interface CommentRepository extends CrudRepository<Comment, String> {
     public List<Comment> findAll();
+
     public Iterable<Comment> deleteCommentById(String id);
+
     public Optional<Comment> findById(String id);
-    public Iterable<Comment> findCommentsByPublicationId( String publication);
+
+    public Iterable<Comment> findCommentsByPublicationId(String publication);
 }

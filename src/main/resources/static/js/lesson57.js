@@ -29,9 +29,9 @@ window.addEventListener('load', function () {
             }).catch(err => console.log(err))
     }
 
-      function fetchAuthorised(url, options) {
+    function fetchAuthorised(url, options) {
         const settings = options || {};
-        return   fetch(url, updateOptions(settings));
+        return fetch(url, updateOptions(settings));
     }
 
     function updateOptions(options) {
@@ -222,7 +222,7 @@ window.addEventListener('load', function () {
         div.append(img);
         span1.append(i1);
         span2.append(i2);
-        span4.append(i3);
+            span4.append(i3);
         div1.append(span1)
         div1.append(span2)
         div1.append(span3)
@@ -313,30 +313,30 @@ window.addEventListener('load', function () {
             addPost(createPostElement(publication))
         })
     }).then(function () {
-            // for comments form
-            const comment = document.getElementsByClassName('far fa-comment');
-            const form = document.getElementById('comment-form');
-            for (let i = 0; i < comment.length; i++) {
-                comment[i].addEventListener('click', function (event) {
-                    form.classList.remove("none");
-                   setTimeout(function () {
-                       console.log(publicId);
+        // for comments form
+        const comment = document.getElementsByClassName('far fa-comment');
+        const form = document.getElementById('comment-form');
+        for (let i = 0; i < comment.length; i++) {
+            comment[i].addEventListener('click', function (event) {
+                form.classList.remove("none");
+                setTimeout(function () {
+                    console.log(publicId);
 
-                       fetch("http://localhost:9393/comment/" + publicId, {
-                           method: "GET"
-                       }).then(res => res.json()).then(
-                           (comment) => {
-                               comment.map(el => {
-                                   createCommentElement(el)
-                               })
-                           }
-                       )
-                   },1000)
-                })
-            }
+                    fetch("http://localhost:9393/comment/" + publicId, {
+                        method: "GET"
+                    }).then(res => res.json()).then(
+                        (comment) => {
+                            comment.map(el => {
+                                createCommentElement(el)
+                            })
+                        }
+                    )
+                }, 1000)
+            })
+        }
 
 
-        }) .catch(err => console.log(err))
+    }).catch(err => console.log(err))
 
 
     const saveButton = document.getElementById("add-comment");
@@ -359,6 +359,7 @@ window.addEventListener('load', function () {
             })
         }).catch(err => console.log(err))
     });
+
 
 
 

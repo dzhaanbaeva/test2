@@ -28,7 +28,6 @@ public class UserDTO {
     }
 
 
-
     private String id = UUID.randomUUID().toString();
     public String email;
     public String name;

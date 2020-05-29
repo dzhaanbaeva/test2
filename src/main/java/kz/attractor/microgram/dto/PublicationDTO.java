@@ -1,6 +1,7 @@
 package kz.attractor.microgram.dto;
+
 import kz.attractor.microgram.Model.User;
-import  lombok.*;
+import lombok.*;
 import kz.attractor.microgram.Model.ILikeIt;
 import kz.attractor.microgram.Model.Publication;
 import lombok.*;
@@ -39,11 +40,10 @@ public class PublicationDTO {
     }
 
     private String id = UUID.randomUUID().toString();
-    public  String image;
-    public  String description;
+    public String image;
+    public String description;
     public String user;
     public LocalDateTime dateTime = LocalDateTime.now();
-
 
 
 }

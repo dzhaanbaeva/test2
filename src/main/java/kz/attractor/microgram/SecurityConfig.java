@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // должно быть доступно только
         // после авторизации пользователя
         http.authorizeRequests()
-                .antMatchers("/page").fullyAuthenticated()
+                .antMatchers("/").fullyAuthenticated()
                 .antMatchers("/publication").permitAll()
                 .antMatchers("/publication/**").fullyAuthenticated()
                 .antMatchers("/commit").fullyAuthenticated()
@@ -45,19 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest()
 //                .permitAll();
 
-        // Настраиваем хранение сессий. Не храним сессию.
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        // Используем авторизацию по механизму Http Basic.
-        // Данные пользователя передаются через заголовок запроса
-        http.httpBasic();
-
-        // Так как мы авторизуемся через заголовок запроса, то
-        // форма входа на сайт и выхода с него нам тоже не нужны.
-//        http.formLogin().disable().logout().disable();
-
-        // Так как у нас REST сервис, нам не нужна защита от CSRF
-        http.csrf().disable();
+//        // Настраиваем хранение сессий. Не храним сессию.
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//        // Используем авторизацию по механизму Http Basic.
+//        // Данные пользователя передаются через заголовок запроса
+//        http.httpBasic();
+//
+//        // Так как мы авторизуемся через заголовок запроса, то
+//        // форма входа на сайт и выхода с него нам тоже не нужны.
+////        http.formLogin().disable().logout().disable();
+//
+//        // Так как у нас REST сервис, нам не нужна защита от CSRF
+//        http.csrf().disable();
     }
 
     @Bean

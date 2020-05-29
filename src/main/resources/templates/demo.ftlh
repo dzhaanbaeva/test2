@@ -82,12 +82,12 @@
                         </div>
                     </div>
                     <!-- comments section end -->
-<#--                    <div id="post"></div>-->
+                    <#--                    <div id="post"></div>-->
                 </div>
 
             </div>
             <!-- single post end -->
-<#--            <button class='addPost'>Add Post</button>-->
+            <#--            <button class='addPost'>Add Post</button>-->
         </div>
     </div>
 </div>
@@ -95,16 +95,16 @@
 <!-- Splash screen -->
 <section id="page-splash" class="page-splash">
     <div class="d-flex justify-content-center">
-<#--        <div class="mx-3">-->
-<#--            <form id="registration-form">-->
-<#--                <h3>Регистрация</h3>-->
-<#--                <input type="email"  name="email" class="form-control mb-1" placeholder="Email">-->
-<#--                <input type="text"  name="name" class="form-control mb-1" placeholder="Полное имя">-->
-<#--                <input type="text" name="login" class="form-control mb-1" placeholder="Логин">-->
-<#--                <input type="password" name="password" class="form-control mb-1" placeholder="Пароль">-->
-<#--                <button class="btn btn-outline-primary btn-block">Зарегистрироваться</button>-->
-<#--            </form>-->
-<#--        </div>-->
+        <#--        <div class="mx-3">-->
+        <#--            <form id="registration-form">-->
+        <#--                <h3>Регистрация</h3>-->
+        <#--                <input type="email"  name="email" class="form-control mb-1" placeholder="Email">-->
+        <#--                <input type="text"  name="name" class="form-control mb-1" placeholder="Полное имя">-->
+        <#--                <input type="text" name="login" class="form-control mb-1" placeholder="Логин">-->
+        <#--                <input type="password" name="password" class="form-control mb-1" placeholder="Пароль">-->
+        <#--                <button class="btn btn-outline-primary btn-block">Зарегистрироваться</button>-->
+        <#--            </form>-->
+        <#--        </div>-->
         <div class="mx-3">
             <form id="login-form">
                 <h3>Вход</h3>

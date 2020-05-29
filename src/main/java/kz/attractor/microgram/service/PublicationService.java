@@ -44,10 +44,11 @@ public class PublicationService {
         //TODO recalculate movie rating before delete
         publicationRepository.deletePublicationById(id);
         return true;
-    }
-    public Iterable<Publication> selectPublicationsById(String id) {
-        return publicationRepository.findPublicationsById(id);
-    }
+
+//    public Iterable<Publication> selectPublicationsById(String id) {
+//        return publicationRepository.findPublicationsById(id);
+//    }
 
 
+    }
 }

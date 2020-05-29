@@ -31,7 +31,10 @@ public class CommentSevice {
         commentRepository.save(comment);
         return CommentDTO.from(comment);
     }
-    public Iterable<Comment> getComment() { return commentRepository.findAll(); }
+
+    public Iterable<Comment> getComment() {
+        return commentRepository.findAll();
+    }
 
     public boolean deleteComment(String commentId) {
         //TODO recalculate movie rating before delete

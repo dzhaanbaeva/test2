@@ -14,6 +14,7 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public UserDTO addUser(UserDTO UserData) {
 
         var user = User.builder()
@@ -26,19 +27,26 @@ public class UserService {
         userRepository.save(user);
         return UserDTO.from(user);
     }
-    public Iterable<User> getUsers() { return userRepository.findAll(); }
+
+    public Iterable<User> getUsers() {
+        return userRepository.findAll();
+    }
 
     public Optional<User> getName(String name) {
         return userRepository.findByName(name);
     }
+
     public boolean existsEmail(String email) {
         return userRepository.existsByEmail(email);
     }
-    public Iterable<User> getEmail(String email) {
-        return  userRepository.getByEmail(email);
-    }
-    public Iterable<User> getUserById(String id) { return userRepository.getUserById(id); }
 
+    public Iterable<User> getEmail(String email) {
+        return userRepository.getByEmail(email);
+    }
+
+    public Iterable<User> getUserById(String id) {
+        return userRepository.getUserById(id);
+    }
 
 
 }

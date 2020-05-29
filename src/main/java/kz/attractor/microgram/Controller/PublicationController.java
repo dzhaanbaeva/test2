@@ -30,33 +30,33 @@ public class PublicationController {
 
     @PostMapping
     public PublicationDTO rootSave(
-                           @RequestParam("description") String description,
-                           @RequestParam("user") String user,
-                           @RequestParam("images") MultipartFile images
-                           ) throws IOException {
-        File photoFile = new File("src/main/resources/static/images/"+ images.getOriginalFilename());
+            @RequestParam("description") String description,
+            @RequestParam("user") String user,
+            @RequestParam("images") MultipartFile images
+    ) throws IOException {
+        File photoFile = new File("src/main/resources/static/images/" + images.getOriginalFilename());
 //        photoFile.createNewFile();
         FileOutputStream os = new FileOutputStream(photoFile);
         os.write(images.getBytes());
         os.close();
 
         PublicationDTO publication;
-        publication = new PublicationDTO(description, images.getOriginalFilename(),user);
+        publication = new PublicationDTO(description, images.getOriginalFilename(), user);
         publicationService.addPublication(publication);
 
         return publication;
     }
 
 
-
     @GetMapping("/{id}")
-    public Iterable<Publication> selectPublications(@PathVariable("id") String id){
+    public Iterable<Publication> selectPublications(@PathVariable("id") String id) {
         return publicationService.selectPublicationsByUserId(id);
     }
-    @GetMapping("/id/{id}")
-    public Iterable<Publication> selectPublication(@PathVariable("id") String id){
-        return publicationService.selectPublicationsById(id);
-    }
+
+//    @GetMapping("/id/{id}")
+//    public Iterable<Publication> selectPublication(@PathVariable("id") String id) {
+//        return publicationService.selectPublicationsById(id);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePublication(@PathVariable String id) {
@@ -65,9 +65,6 @@ public class PublicationController {
 
         return ResponseEntity.notFound().build();
     }
-
-
-
 
 
 }
