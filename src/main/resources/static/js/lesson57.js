@@ -171,6 +171,8 @@ window.addEventListener('load', function () {
             p.innerHTML = comment.comment;
             div.append(h6);
             div.append(p);
+            div.append(p);
+            div.append(p);
 
             root.append(div)
         }
@@ -184,6 +186,7 @@ window.addEventListener('load', function () {
         const div = document.createElement('div');
         div.setAttribute("id", post.id);
         const h2 = document.createElement('h2');
+
         h2.innerHTML = post.user.name;
         const p = document.createElement("p");
         const div2 = document.createElement('div');
