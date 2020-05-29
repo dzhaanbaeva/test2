@@ -20,6 +20,13 @@
         <button type="button" id="add-comment">Enter</button>
         <button type="button" id="add-comment">Enter</button>
         <button type="button" id="add-comment">Enter</button>
+        <button type="button" id="add-comment">Enter</button>
+        <button type="button" id="add-comment">Enter</button>
+        <button type="button" id="add-comment">Enter</button>
+        <button type="button" id="add-comment">Enter</button>
+        <button type="button" id="add-comment">Enter</button>
+        <button type="button" id="add-comment">Enter</button>
+        <button type="button" id="add-comment">Enter</button>
     </form>
     <div class="row justify-content-center">
         <div class="col col-lg-7 posts-container">
