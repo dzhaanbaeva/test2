@@ -187,6 +187,7 @@ window.addEventListener('load', function () {
         h2.innerHTML = post.user.name;
         const p = document.createElement("p");
         const div2 = document.createElement('div');
+    console.log(div2);
         p.innerHTML = post.description;
         p.setAttribute('class', 'post-2');
         div2.setAttribute('class', 'main');
