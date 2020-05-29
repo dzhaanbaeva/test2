@@ -171,6 +171,8 @@ window.addEventListener('load', function () {
             p.innerHTML = comment.comment;
             div.append(h6);
             div.append(p);
+            div.append(p);
+            div.append(p);
 
             root.append(div)
         }
